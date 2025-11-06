@@ -1,0 +1,136 @@
+/* css_main.css
+   Styles for korea/index.html (Namsan hero layout)
+   - Layers two full-width images for depth
+   - Positions logo bottom-right
+   - Adds optional 'Explore myeongdong' decorative overlay (cursive)
+   - Works alongside Bootstrap and animate.css
+*/
+
+/* Reset small things to keep images full-bleed */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Container holding layered hero images */
+.position-relative {
+  /* larger hero so the tower can anchor to the bottom and remain visible */
+  min-height: 70vh;
+  max-height: 110vh;
+  overflow: hidden;
+  background: #000; /* fallback while images load */
+}
+
+/* Make both images fill the container and use cover scaling anchored to bottom */
+.position-relative > img:first-of-type {
+  object-fit: cover;
+  object-position: center bottom; /* anchor important visual area to bottom */
+  height: 100%;
+}
+
+/* Overlay image sits above base; keep exact cover and anchored to bottom */
+.position-relative > img.position-absolute {
+  object-fit: cover;
+  object-position: center bottom;
+  height: 100%;
+  z-index: 2;
+}
+
+/* Ensure images scale nicely while keeping aspect ratio */
+.position-relative img.img-fluid {
+  width: 100%;
+  max-width: none; /* allow absolute image to span container */
+}
+
+/* Logo container tweak (additional to Bootstrap utilities) */
+.logocontainer .logo img {
+  display: block;
+  height: auto;
+}
+
+/* Optional decorative overlay (Explore myeongdong) */
+.explore-overlay {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  padding: 0.45rem 0.8rem;
+  border-radius: 0.45rem;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(0.95rem, 3vw, 1.9rem);
+  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+  transition: transform .12s ease, box-shadow .12s ease;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+.explore-overlay:focus, .explore-overlay:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.55);
+  outline: none;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 640px) {
+  .position-relative { min-height: 48vh; }
+  .explore-overlay { right: 0.6rem; bottom: 0.6rem; font-size: 1rem; padding: 0.35rem 0.6rem; }
+}
+
+/* anchor overlay image to bottom-left */
+.position-relative > img.position-absolute {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Accessibility: focus visible for keyboard users */
+.explore-overlay:focus {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.12), 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* --- Article styles appended (from article.css) --- */
+:root{
+  --max-width: 760px;
+  --accent: #d63384; /* subtle accent */
+}
+
+body{
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color: #222;
+  background: #fff;
+  line-height: 1.6;
+}
+
+h1,h2,h3,h4{ font-family: 'Merriweather', serif; color: #111; }
+
+.container > article { gap: 2rem; }
+
+article img { max-width: 100%; height: auto; display: block; }
+
+.lead{ font-size: 1.15rem; color: #333; }
+
+/* center the main column for better reading on wide screens */
+main .col-lg-8{ max-width: var(--max-width); }
+
+/* breadcrumb and header tweaks */
+.breadcrumb{ background: transparent; padding:0; margin:0; }
+
+/* card small tweaks */
+.card img{ object-fit: cover; height: 160px; }
+
+/* small screen spacing tweaks */
+@media (max-width: 991px){
+  main .col-lg-8, main .col-lg-4{ max-width: 100%; }
+}
+
+/* minor anchor styling */
+a.btn-primary{ background: var(--accent); border: none; }
+
+/* visually distinct related posts list */
+footer{ margin-top: 3rem; }
+
+/* small typographic niceties */
+small{ color: #666; }
